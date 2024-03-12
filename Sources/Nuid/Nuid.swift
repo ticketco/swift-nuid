@@ -1,8 +1,5 @@
 import Foundation
 
-// Version of the library
-let Version = "1.0.1"
-
 let DIGITS = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".utf8)
 let BASE = 62
 let PRE_LEN = 12
@@ -12,7 +9,7 @@ let MIN_INC = Int64(33)
 let MAX_INC = Int64(333)
 let TOTAL_LEN = PRE_LEN + SEQ_LEN
 
-class NUID {
+public class NUID {
     var pre: [UInt8]
     var seq: Int64
     var inc: Int64
@@ -24,7 +21,7 @@ class NUID {
         self.randomizePrefix()
     }
 
-    func next() -> String {
+    public func next() -> String {
         self.seq += self.inc
         if self.seq >= MAX_SEQ {
             self.randomizePrefix()
@@ -52,7 +49,7 @@ class NUID {
         self.inc = MIN_INC + Int64.random(in: 0..<(MAX_INC - MIN_INC))
     }
 
-    func randomizePrefix() {
+    public func randomizePrefix() {
         var cb = [UInt8](repeating: 0, count: PRE_LEN)
         let result = SecRandomCopyBytes(kSecRandomDefault, PRE_LEN, &cb)
 
@@ -85,11 +82,11 @@ class LockedNUID {
 var globalNUID = LockedNUID()
 
 // Generate the next NUID string from the global locked NUID instance.
-func Next() -> String {
+public func Next() -> String {
     return globalNUID.next()
 }
 
 // Generate a new NUID instance.
-func New() -> NUID {
+public func New() -> NUID {
     return NUID()
 }
