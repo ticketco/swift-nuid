@@ -1,6 +1,6 @@
 import XCTest
-@testable import SwiftNuid
 
+@testable import SwiftNuid
 
 final class swiftNuidTests: XCTestCase {
     func testDigits() {
@@ -43,12 +43,11 @@ final class swiftNuidTests: XCTestCase {
         for _ in 0..<total {
             let n = New()
             for j in 0..<PRE_LEN {
-                XCTAssertGreaterThanOrEqual(n.pre[j], min, "Valid range for bytes prefix: [\(min)..\(max)]")
-                XCTAssertLessThanOrEqual(n.pre[j], max, "Valid range for bytes prefix: [\(min)..\(max)]")
+                XCTAssertGreaterThanOrEqual(
+                    n.pre[j], min, "Valid range for bytes prefix: [\(min)..\(max)]")
+                XCTAssertLessThanOrEqual(
+                    n.pre[j], max, "Valid range for bytes prefix: [\(min)..\(max)]")
             }
         }
     }
 }
-
-
-

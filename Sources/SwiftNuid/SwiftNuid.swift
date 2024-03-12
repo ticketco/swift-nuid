@@ -7,7 +7,7 @@ let DIGITS = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx
 let BASE = 62
 let PRE_LEN = 12
 let SEQ_LEN = 10
-let MAX_SEQ = Int64(839299365868340224) // base^seqLen == 62^10
+let MAX_SEQ = Int64(839_299_365_868_340_224)  // base^seqLen == 62^10
 let MIN_INC = Int64(33)
 let MAX_INC = Int64(333)
 let TOTAL_LEN = PRE_LEN + SEQ_LEN
