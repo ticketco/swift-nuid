@@ -4,20 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftNuid",
+    name: "swift-nuid",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "SwiftNuid",
-            targets: ["SwiftNuid"])
+            name: "Nuid",
+            targets: ["Nuid"])
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftNuid"),
+            name: "Nuid"),
         .testTarget(
-            name: "SwiftNuidTests",
-            dependencies: ["SwiftNuid"]),
+            name: "NuidTests",
+            dependencies: ["Nuid"]),
     ]
 )

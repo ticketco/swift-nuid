@@ -1,8 +1,8 @@
 import XCTest
 
-@testable import SwiftNuid
+@testable import Nuid
 
-final class swiftNuidTests: XCTestCase {
+final class NuidTests: XCTestCase {
     func testDigits() {
         XCTAssertEqual(DIGITS.count, BASE, "Digits length does not match base modulo")
     }
