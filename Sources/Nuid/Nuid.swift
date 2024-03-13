@@ -9,7 +9,7 @@ let MIN_INC = Int64(33)
 let MAX_INC = Int64(333)
 let TOTAL_LEN = PRE_LEN + SEQ_LEN
 
-public class NUID {
+public class Nuid {
     var pre: [UInt8]
     var seq: Int64
     var inc: Int64
@@ -50,7 +50,7 @@ public class NUID {
         self.inc = MIN_INC + Int64.random(in: 0..<(MAX_INC - MIN_INC))
     }
 
-    public func randomizePrefix() {
+     func randomizePrefix() {
         var cb = [UInt8](repeating: 0, count: PRE_LEN)
         let result = SecRandomCopyBytes(kSecRandomDefault, PRE_LEN, &cb)
 
@@ -64,12 +64,12 @@ public class NUID {
     }
 }
 
-class LockedNUID {
+class LockedNuid {
     private var lock = NSLock()
-    var nuid: NUID
+    var nuid: Nuid
 
     init() {
-        self.nuid = NUID()
+        self.nuid = Nuid()
     }
 
     func next() -> String {
@@ -80,14 +80,14 @@ class LockedNUID {
 }
 
 // Global NUID
-var globalNUID = LockedNUID()
+var globalNUID = LockedNuid()
 
 // Generate the next NUID string from the global locked NUID instance.
-public func Next() -> String {
+public func nextNuid() -> String {
     return globalNUID.next()
 }
 
 // Generate a new NUID instance.
-public func New() -> NUID {
-    return NUID()
+public func newNuid() -> Nuid {
+    return Nuid()
 }

@@ -16,12 +16,12 @@ final class NuidTests: XCTestCase {
     func testNUIDRollover() {
         globalNUID.nuid.seq = MAX_SEQ
         let oldPre = globalNUID.nuid.pre
-        _ = Next()
+        _ = nextNuid()
         XCTAssertNotEqual(globalNUID.nuid.pre, oldPre, "Expected new pre, got the old one")
     }
 
     func testGUIDLen() {
-        let nuid = Next()
+        let nuid = nextNuid()
         XCTAssertEqual(nuid.count, TOTAL_LEN, "Expected len of \(TOTAL_LEN), got \(nuid.count)")
     }
 
@@ -39,7 +39,7 @@ final class NuidTests: XCTestCase {
 
         let total = 100000
         for _ in 0..<total {
-            let n = New()
+            let n = newNuid()
             for j in 0..<PRE_LEN {
                 XCTAssertGreaterThanOrEqual(
                     n.pre[j], min, "Valid range for bytes prefix: [\(min)..\(max)]")
