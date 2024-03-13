@@ -27,37 +27,39 @@ public class NUID {
             self.randomizePrefix()
             self.resetSequential()
         }
+
         let seq = self.seq
-
         var b = [UInt8](repeating: 0, count: TOTAL_LEN)
-        var bs = b[0..<PRE_LEN]
-        bs.replaceSubrange(bs.startIndex..<bs.endIndex, with: self.pre)
 
-        var i = b.count
+        // Set the prefix part
+        b.replaceSubrange(0..<PRE_LEN, with: self.pre)
+
+        // Set the sequence part
+        var i = TOTAL_LEN - 1
         var l = seq
-        while i > PRE_LEN {
-            i -= 1
+        while i >= PRE_LEN {
             b[i] = DIGITS[Int(l % Int64(BASE))]
             l /= Int64(BASE)
+            i -= 1
         }
 
         return String(decoding: b, as: UTF8.self)
     }
-
     func resetSequential() {
         self.seq = Int64.random(in: 0..<MAX_SEQ)
         self.inc = MIN_INC + Int64.random(in: 0..<(MAX_INC - MIN_INC))
     }
 
-    func randomizePrefix() {
+    public func randomizePrefix() {
         var cb = [UInt8](repeating: 0, count: PRE_LEN)
         let result = SecRandomCopyBytes(kSecRandomDefault, PRE_LEN, &cb)
+
         if result != errSecSuccess {
             fatalError("nuid: failed generating crypto random number")
         }
+
         for i in 0..<PRE_LEN {
-            let index = Int(cb[i]) % DIGITS.count
-            self.pre[i] = DIGITS[index]
+            self.pre[i] = DIGITS[Int(cb[i]) % BASE]
         }
     }
 }

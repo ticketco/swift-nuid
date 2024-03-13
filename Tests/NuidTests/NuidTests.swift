@@ -28,7 +28,6 @@ final class NuidTests: XCTestCase {
     func testProperPrefix() {
         var min: UInt8 = 255
         var max: UInt8 = 0
-
         for digit in DIGITS {
             if digit < min {
                 min = digit
@@ -39,7 +38,6 @@ final class NuidTests: XCTestCase {
         }
 
         let total = 100000
-
         for _ in 0..<total {
             let n = New()
             for j in 0..<PRE_LEN {
@@ -47,6 +45,7 @@ final class NuidTests: XCTestCase {
                     n.pre[j], min, "Valid range for bytes prefix: [\(min)..\(max)]")
                 XCTAssertLessThanOrEqual(
                     n.pre[j], max, "Valid range for bytes prefix: [\(min)..\(max)]")
+                XCTAssertNotEqual(n.pre[j], 0, "Prefix should not contain null bytes")
             }
         }
     }
