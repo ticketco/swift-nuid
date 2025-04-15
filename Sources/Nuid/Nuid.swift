@@ -69,8 +69,7 @@ public class Nuid {
     private func generateSecureRandomBytes(_ buffer: inout [UInt8], count: Int) {
         #if os(Linux)
         // Use /dev/urandom for Linux
-        let file = fopen("/dev/urandom", "rb")
-        guard file != nil else {
+        guard let file = fopen("/dev/urandom", "rb") else {
             fatalError("nuid: failed to open /dev/urandom")
         }
         defer { fclose(file) }
